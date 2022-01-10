@@ -1,0 +1,146 @@
+@prefix : <http://www.is-unit4.com/pattern/buyers.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.is-unit4.com/pattern/buyers.owl> .
+
+<http://www.is-unit4.com/pattern/buyers.owl> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.is-unit4.com/pattern/buyers.owl#hasBuyersAmount
+:hasBuyersAmount rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#hasBuyersRelation
+:hasBuyersRelation rdf:type owl:ObjectProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:range :Genre_Buyers_Relation .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#hasBuyersTrend
+:hasBuyersTrend rdf:type owl:ObjectProperty ,
+                         owl:FunctionalProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Buyers_Amount
+:Buyers_Amount rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Class ;
+                                     owl:oneOf ( :High
+                                                 :Low
+                                                 :Medium
+                                               )
+                                   ] .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Buyers_Trend
+:Buyers_Trend rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Class ;
+                                    owl:oneOf ( :Falling
+                                                :Increasing
+                                                :Stable
+                                              )
+                                  ] .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Genre
+:Genre rdf:type owl:Class ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasBuyersRelation ;
+                         owl:allValuesFrom :Genre_Buyers_Relation
+                       ] .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Genre_Buyers_Relation
+:Genre_Buyers_Relation rdf:type owl:Class ;
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty :hasBuyersAmount ;
+                                         owl:allValuesFrom :Buyers_Amount
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :hasBuyersTrend ;
+                                         owl:allValuesFrom :Buyers_Trend
+                                       ] .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Falling
+:Falling rdf:type owl:NamedIndividual ,
+                  :Buyers_Trend .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#High
+:High rdf:type owl:NamedIndividual ,
+               :Buyers_Amount .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Increasing
+:Increasing rdf:type owl:NamedIndividual ,
+                     :Buyers_Trend .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Low
+:Low rdf:type owl:NamedIndividual ,
+              :Buyers_Amount .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Medium
+:Medium rdf:type owl:NamedIndividual ,
+                 :Buyers_Amount .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Poetry
+:Poetry rdf:type owl:NamedIndividual ,
+                 :Genre ;
+        :hasBuyersRelation :Poetry_Buyers_Relation .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Poetry_Buyers_Relation
+:Poetry_Buyers_Relation rdf:type owl:NamedIndividual ,
+                                 :Genre_Buyers_Relation .
+
+
+###  http://www.is-unit4.com/pattern/buyers.owl#Stable
+:Stable rdf:type owl:NamedIndividual ,
+                 :Buyers_Trend .
+
+
+[ :hasBuyersAmount :High
+] .
+
+[ :hasBuyersTrend :Falling
+ ] .
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDifferent ;
+   owl:distinctMembers ( :Falling
+                         :Increasing
+                         :Stable
+                       )
+ ] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :High
+                        :Low
+                        :Medium
+                      )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

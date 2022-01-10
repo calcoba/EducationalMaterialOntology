@@ -1,4 +1,5 @@
 # EducationalMaterialOntology
+### This project has been developed by Carlos Alcoba, Javier Jiménez y Javier Pozo as part of Itelligent Systems subject of M. Sc. in Health and Medical Data Analytics.
 The main task of this work has been to create knowledge graph in the field of educational
 materials that can serve not only to enumerate their characteristics in a
 structured way – in where tabular formats are sufficient – but also to relate them
